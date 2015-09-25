@@ -1,0 +1,17 @@
+* {margin:0;padding:0;font-family:'微软雅黑';font-size:30px;}
+#item_name,#main_board {background-color:rgb(92,92,92)}
+#item_content {background-color:rgb(228,228,228)}
+a {margin-left:20px;line-height:100px;color:rgb(238,238,238);
+   cursor:pointer;display:inline-block}
+a:link {color:rgb(238,238,238)}
+a:visited {color:rgb(238,238,238)}
+a:hover {color:red}
+a:active {color:rgb(238,238,238)}
+a span {font-size:24px;font-family:'Consolas'}
+#item_content p {color:red;text-align:center;font-weight:bold}
+#main_board p {margin-left:30px;line-height:100px;color:rgb(238,238,238);display:inline-block}
+#main_board span {margin-left:10px;color:red}
+#item_stock {font-size:50px;padding-top:20px}
+#item_value {font-size:100px;padding-top:20px}
+#item_rate {font-size:50px;padding-top:20px}
+.selected {color:red}

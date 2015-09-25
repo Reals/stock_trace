@@ -1,0 +1,38 @@
+#!/usr/bin/perl
+
+#$file_in = $ARGV[0]; # uploaded filename
+#$file_cm = $ARGV[1]; # comments
+#$r_repo = $ARGV[2]; # remote repository
+#$r_brch = $ARGV[3]; # remote branch(:codeVersion)
+
+$file_in = ".";
+$file_cm = "updated";
+$r_repo = "";
+$r_brch = "";
+
+foreach(@ARGV) {
+  chomp;
+  $str = $_;
+  if(/filename=/) {
+    $file_in = substr($str,9,(length $str)-1);
+  }
+  if(/comment=/) {
+    $file_cm = substr($str,8,(length $str)-1);
+  }
+  if(/repo=/) {
+    $r_repo = substr($str,5,(length $str)-1);
+  }
+  if(/branch=/) {
+    $r_brch = substr($str,7,(length $str)-1);  
+  }
+}
+
+print "=== Parameter === \n";
+print "  submited : ".(($file_in eq ".") ? "all files modifed" : $file_in)."\n";
+print "  comments : ".$file_cm."\n";
+print "repository : ".(($r_repo eq "") ? "default" : $r_repo)."\n";
+print "    branch : ".(($r_brch eq "") ? "default" : $r_brch)."\n";
+
+system("git add $file_in");
+system("git commit -m \"$file_cm\" $file_in");
+system("git push $r_repo $r_brch");

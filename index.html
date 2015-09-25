@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name=”viewport” content=”width=device-width, initial-scale=1, maximum-scale=1″>
+  <title>行情监控</title>
+  <link type="text/css" rel="stylesheet" href="css/main.css" />
+  <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="js/get_stock.js"></script>
+  <script type="text/javascript" src="js/add_stock.js"></script>
+  <script type="text/javascript">
+     $(function(){
+        var docHeight = $(document).height();
+        var nameHeight = $("#item_name").height();
+        var mainHeight = $("#main_board").height();
+        var valueHeight = docHeight - nameHeight - mainHeight;
+        var padHeight = valueHeight - $("#item_stock").outerHeight() - $("#item_value").outerHeight() - $("#item_rate").outerHeight();
+        $("#item_content").height(valueHeight-2);
+        $("#item_stock").css({"padding-top":padHeight/2+"px"});
+        getStock($(".selected").find("span").text(),$(".selected"));
+        $("#item_name a").on("click",function(e){
+          var code = $(this).find("span").text(); 
+          if(code == "+")
+            addStock();
+          getStock(code,$(this));
+        });
+        setInterval("autoUpdated()",5000);
+     });
+  </script>
+</head>
+
+<body>
+  <div id="item_name">
+     <a class="selected">国脉科技(<span>002093</span>)</a>
+     <a>中超控股(<span>002471</span>)</a>
+     <a>中信证券(<span>600030</span>)</a>
+     <a>南方航空(<span>600029</span>)</a>
+     <a>博云新材(<span>002297</span>)</a>
+     <a>亚星锚链(<span>601890</span>)</a>
+     <a>万科A(<span>000002</span>)</a>
+     <a>添加股票<span>+</span></a>
+  </div>
+  <hr />
+  <div id="item_content">
+      <p id="item_stock">----</p>
+      <p id="item_value">--.--</p>
+      <p id="item_rate">-.--</p>
+  </div>
+  <div id="main_board">
+     <p id="main_sh">上证指数:<span class="main_value" id="sh_v">0000:00</span><span class="main_rate" id="sh_r">0.00%</span></p>
+     <p id="main_sz">深证成指:<span class="main_value" id="sz_v">0000:00</span><span class="main_rate" id="sz_r">0.00%</span></p>
+     <p id="main_cy">创业板指:<span class="main_value" id="cy_v">0000:00</span><span class="main_rate" id="cy_r">0.00%</span></p>
+  </div>
+</body>
+</html>
